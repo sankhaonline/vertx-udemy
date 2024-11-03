@@ -7,12 +7,12 @@ import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.mutiny.core.Vertx;
 import io.vertx.mutiny.ext.web.client.HttpResponse;
 import io.vertx.mutiny.ext.web.client.WebClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.ws.rs.*;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 
 @Path("/vertx")
 @ApplicationScoped
@@ -25,7 +25,8 @@ public class HelloVertxResource {
   @Inject
   public HelloVertxResource(Vertx vertx) {
     this.client = WebClient.create(vertx,
-      new WebClientOptions().setDefaultHost("localhost").setDefaultPort(8080)
+      new WebClientOptions().setDefaultHost("localhost")
+        .setDefaultPort(8080)
     );
   }
 
@@ -34,13 +35,15 @@ public class HelloVertxResource {
     final var item = new JsonArray();
     item.add(new JsonObject().put("id", 1));
     item.add(new JsonObject().put("id", 2));
-    return Uni.createFrom().item(item);
+    return Uni.createFrom()
+      .item(item);
   }
 
   @GET
   @Path("/users")
   public Uni<JsonArray> getFromUsers() {
-    return client.get("/users").send()
+    return client.get("/users")
+      .send()
       .onItem()
       .transform(HttpResponse::bodyAsJsonArray);
   }

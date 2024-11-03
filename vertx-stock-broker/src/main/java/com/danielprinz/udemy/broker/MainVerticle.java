@@ -30,6 +30,22 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
+    vertx.createHttpServer().requestHandler(req -> {
+      req.response()
+        .putHeader("content-type", "text/plain")
+        .end("Hello from Vert.Y!");
+    }).listen(8888, http -> {
+      if (http.succeeded()) {
+        startPromise.complete();
+        LOG.info("HTTP server started on port 8888");
+      } else {
+        startPromise.fail(http.cause());
+      }
+    });
+  }
+
+  /*@Override
+  public void start(Promise<Void> startPromise) throws Exception {
     vertx.deployVerticle(VersionInfoVerticle.class.getName())
       .onFailure(startPromise::fail)
       .onSuccess(id -> LOG.info("Deployed {} with id {}", VersionInfoVerticle.class.getSimpleName(), id))
@@ -48,8 +64,8 @@ public class MainVerticle extends AbstractVerticle {
 
   private Future<String> deployRestApiVerticle(final Promise<Void> startPromise) {
     return vertx.deployVerticle(RestApiVerticle.class.getName(),
-      new DeploymentOptions().setInstances(halfProcessors())
-    )
+        new DeploymentOptions().setInstances(halfProcessors())
+      )
       .onFailure(startPromise::fail)
       .onSuccess(id -> {
         LOG.info("Deployed {} with id {}", RestApiVerticle.class.getSimpleName(), id);
@@ -58,7 +74,8 @@ public class MainVerticle extends AbstractVerticle {
   }
 
   private int halfProcessors() {
-    return Math.max(1, Runtime.getRuntime().availableProcessors() / 2);
-  }
+    return Math.max(1, Runtime.getRuntime()
+      .availableProcessors() / 2);
+  }*/
 
 }

@@ -4,9 +4,9 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
   java
   application
-  id("com.github.johnrengelman.shadow") version "7.1.2"
-  id("io.spring.dependency-management") version "1.1.5"
-  id("com.google.cloud.tools.jib") version "3.3.2"
+  id("com.github.johnrengelman.shadow") version "8.1.1"
+  id("io.spring.dependency-management") version "1.1.6"
+  id("com.google.cloud.tools.jib") version "3.4.3"
   id("com.github.ben-manes.versions") version "0.51.0"
 }
 
@@ -17,9 +17,9 @@ repositories {
   mavenCentral()
 }
 
-val vertxVersion = "4.5.8"
-val junitJupiterVersion = "5.9.3"
-val jacksonVersion = "2.17.1"
+val vertxVersion = "4.5.10"
+val junitJupiterVersion = "5.11.3"
+val jacksonVersion = "2.18.1"
 
 val mainVerticleName = "com.danielprinz.udemy.vertx_starter.MainVerticle"
 val watchForChange = "src/**/*"
@@ -32,7 +32,7 @@ application {
 
 dependencyManagement {
   imports {
-    mavenBom("org.apache.logging.log4j:log4j-bom:2.23.1")
+    mavenBom("org.apache.logging.log4j:log4j-bom:2.24.1")
   }
 }
 
@@ -42,19 +42,19 @@ dependencies {
   implementation("org.apache.logging.log4j:log4j-api")
   implementation("org.apache.logging.log4j:log4j-core")
   implementation("org.apache.logging.log4j:log4j-slf4j-impl")
-  implementation("org.slf4j:slf4j-api:1.7.36")
+  implementation("org.slf4j:slf4j-api:2.0.16")
   testImplementation("io.vertx:vertx-junit5:$vertxVersion")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
   java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
 
 jib {
   from {
-    image = "amazoncorretto:17"
+    image = "amazoncorretto:21"
   }
   to {
     image = "example/jib/vertx-starter"

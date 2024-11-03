@@ -4,7 +4,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
   java
   application
-  id("com.github.johnrengelman.shadow") version "7.1.2"
+  id("com.github.johnrengelman.shadow") version "8.1.1"
   id("com.github.ben-manes.versions") version "0.51.0"
 }
 
@@ -15,9 +15,9 @@ repositories {
   mavenCentral()
 }
 
-val vertxVersion = "4.5.8"
-val junitJupiterVersion = "5.9.3"
-val logbackVersion = "1.5.6"
+val vertxVersion = "4.5.10"
+val junitJupiterVersion = "5.11.3"
+val logbackVersion = "1.5.12"
 
 val mainVerticleName = "com.danielprinz.udemy.vertx_websockets.MainVerticle"
 val launcherClassName = "io.vertx.core.Launcher"
@@ -38,8 +38,8 @@ dependencies {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
-  targetCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<ShadowJar> {

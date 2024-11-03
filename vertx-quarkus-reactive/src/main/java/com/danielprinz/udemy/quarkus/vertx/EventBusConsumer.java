@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import static com.danielprinz.udemy.quarkus.vertx.PeriodicUserFetcher.ADDRESS;
 

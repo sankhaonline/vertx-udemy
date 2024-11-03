@@ -2,9 +2,9 @@ package com.danielprinz.udemy.quarkus;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import jakarta.persistence.Cacheable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
 @Entity
 @Cacheable

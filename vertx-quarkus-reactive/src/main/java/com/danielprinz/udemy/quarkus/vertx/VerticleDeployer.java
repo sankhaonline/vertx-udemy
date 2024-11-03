@@ -4,9 +4,9 @@ import io.quarkus.runtime.StartupEvent;
 import io.smallrye.mutiny.vertx.core.AbstractVerticle;
 import io.vertx.mutiny.core.Vertx;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
 
 @ApplicationScoped
 public class VerticleDeployer {
